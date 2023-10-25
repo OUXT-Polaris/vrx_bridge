@@ -1,0 +1,1 @@
+connect sensor topic from vrx gazebo to Our Wam-v software.
