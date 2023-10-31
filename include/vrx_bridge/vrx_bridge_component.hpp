@@ -65,6 +65,7 @@ extern "C" {
 #include <geographic_msgs/msg/geo_pose_stamped.hpp>
 #include <sensor_msgs/msg/imu.hpp>
 #include <sensor_msgs/msg/nav_sat_fix.hpp>
+#include <geometry_msgs/msg/pose_stamped.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 
@@ -79,12 +80,15 @@ public:
 private:
   rclcpp::Subscription<sensor_msgs::msg::NavSatFix>::SharedPtr gps_sub_;
   rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr imu_sub_;
+  rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr goal_sub_;
 
   rclcpp::Publisher<geographic_msgs::msg::GeoPoseStamped>::SharedPtr gps_pub_;
   rclcpp::Publisher<sensor_msgs::msg::Imu>::SharedPtr imu_pub_;
+  rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr goal_pub_;
 
   void GPStopic_callback(const sensor_msgs::msg::NavSatFix::SharedPtr msg);
   void Imutopic_callback(const sensor_msgs::msg::Imu::SharedPtr msg);
+  void Goaltopic_callback(const geometry_msgs::msg::PoseStamped::SharedPtr msg);
 };
 }  // namespace vrx_bridge
 

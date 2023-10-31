@@ -23,12 +23,18 @@ VRXBridgeComponent::VRXBridgeComponent(
   gps_sub_ = this->create_subscription<sensor_msgs::msg::NavSatFix>(
     "/wamv/sensors/gps/gps/fix", 1,
     std::bind(&VRXBridgeComponent::GPStopic_callback, this, std::placeholders::_1));
+
   imu_sub_ = this->create_subscription<sensor_msgs::msg::Imu>(
     "/wamv/sensors/imu/imu/data", 1,
     std::bind(&VRXBridgeComponent::Imutopic_callback, this, std::placeholders::_1));
 
+  goal_sub_ = this->create_subscription<geometry_msgs::msg::PoseStamped>(
+    "/vrx/stationkeeping/goal", 1,
+    std::bind(&VRXBridgeComponent::Goaltopic_callback, this, std::placeholders::_1));
+
   gps_pub_ = this->create_publisher<geographic_msgs::msg::GeoPoseStamped>("/geopose", 1);
   imu_pub_ = this->create_publisher<sensor_msgs::msg::Imu>("/imu", 1);
+  goal_pub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("/move_base_simple/goal", 1);
 }
 
 void VRXBridgeComponent::GPStopic_callback(
@@ -51,6 +57,15 @@ void VRXBridgeComponent::Imutopic_callback(
   imu.angular_velocity = msg->angular_velocity;
   imu.linear_acceleration = msg->linear_acceleration;
   imu_pub_->publish(imu);
+}
+
+void VRXBridgeComponent::Goaltopic_callback(
+  const geometry_msgs::msg::PoseStamped::SharedPtr msg)
+{
+  geometry_msgs::msg::PoseStamped goal;
+  goal.header = msg->header;
+  goal.pose = msg->pose;
+  goal_pub_->publish(goal);
 }
 
 }  // namespace vrx_bridge
