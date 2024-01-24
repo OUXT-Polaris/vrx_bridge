@@ -16,6 +16,15 @@
   <depend>geometry_msgs</depend>
   <depend>launch</depend>
 
+  <launch>
+  <!-- component container(動的にノードを載せられるExecutor)を用意 --> <!--動的に載せられるノードとは？-->
+    <node_container pkg="rclcpp_components" exec="component_container_mt" name="pub_sub_container" namespace="pub_sub" args="">
+      <node pkg="opencv_components" exec="opencv_marc_match" name="marc_match" namespace="match">
+      </node>
+    </node_container>
+  </launch>
+
+
   <test_depend>ouxt_lint_auto</test_depend>
 
   <export>
