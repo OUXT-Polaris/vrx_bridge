@@ -16,8 +16,7 @@
 
 namespace vrx_bridge
 {
-VRXBridgeComponent::VRXBridgeComponent(
-  const rclcpp::NodeOptions & options)
+VRXBridgeComponent::VRXBridgeComponent(const rclcpp::NodeOptions & options)
 : Node("vrx_bridge", options)
 {
   gps_sub_ = this->create_subscription<sensor_msgs::msg::NavSatFix>(
@@ -37,8 +36,7 @@ VRXBridgeComponent::VRXBridgeComponent(
   goal_pub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("/move_base_simple/goal", 1);
 }
 
-void VRXBridgeComponent::GPStopic_callback(
-  const sensor_msgs::msg::NavSatFix::SharedPtr msg)
+void VRXBridgeComponent::GPStopic_callback(const sensor_msgs::msg::NavSatFix::SharedPtr msg)
 {
   geographic_msgs::msg::GeoPoseStamped gps;
   gps.header = msg->header;
@@ -49,8 +47,7 @@ void VRXBridgeComponent::GPStopic_callback(
   gps_pub_->publish(gps);
 }
 
-void VRXBridgeComponent::Imutopic_callback(
-  const sensor_msgs::msg::Imu::SharedPtr msg)
+void VRXBridgeComponent::Imutopic_callback(const sensor_msgs::msg::Imu::SharedPtr msg)
 {
   sensor_msgs::msg::Imu imu;
   imu.header = msg->header;
@@ -59,8 +56,7 @@ void VRXBridgeComponent::Imutopic_callback(
   imu_pub_->publish(imu);
 }
 
-void VRXBridgeComponent::Goaltopic_callback(
-  const geometry_msgs::msg::PoseStamped::SharedPtr msg)
+void VRXBridgeComponent::Goaltopic_callback(const geometry_msgs::msg::PoseStamped::SharedPtr msg)
 {
   geometry_msgs::msg::PoseStamped goal;
   goal.header = msg->header;

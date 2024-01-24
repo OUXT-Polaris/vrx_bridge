@@ -20,8 +20,7 @@ int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
   rclcpp::NodeOptions options;
-  auto component =
-    std::make_shared<vrx_bridge::VRXBridgeComponent>(options);
+  auto component = std::make_shared<vrx_bridge::VRXBridgeComponent>(options);
   rclcpp::spin(component);
   rclcpp::shutdown();
   return 0;

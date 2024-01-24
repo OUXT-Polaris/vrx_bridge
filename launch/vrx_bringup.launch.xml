@@ -1,0 +1,8 @@
+<launch>
+  <!-- component container(動的にノードを載せられるExecutor)を用意 -->
+  <node_container pkg="rclcpp_components" exec="component_container_mt" name="vrx_bridge_container" namespace="vrx_bridge" args="">
+    <composable_node pkg="vrx_bridge" plugin="vrx_bridge::VRXBridgeComponent" name="vrx_bridge_component">
+    </composable_node>
+  </node_container>
+  <include file="$(find-pkg-share robotx_ekf)/launch/ekf.launch.xml"/>
+</launch>
