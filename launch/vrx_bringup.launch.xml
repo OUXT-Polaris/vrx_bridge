@@ -1,8 +1,17 @@
 <launch>
-  <!-- component container(動的にノードを載せられるExecutor)を用意 -->
+  <arg name="behavior" default="go"/>
+
   <node_container pkg="rclcpp_components" exec="component_container_mt" name="vrx_bridge_container" namespace="vrx_bridge" args="">
     <composable_node pkg="vrx_bridge" plugin="vrx_bridge::VRXBridgeComponent" name="vrx_bridge_component">
     </composable_node>
   </node_container>
+  
   <include file="$(find-pkg-share robotx_ekf)/launch/ekf.launch.xml"/>
+
+  <include file="$(find-pkg-share perception_bringup)/launch/perception_bringup.launch.py"/>
+
+  <include file="$(find-pkg-share robotx_planner_bringup)/launch/planner_bringup.launch.py">
+    <arg name="behavior_config_package" value="vrx_bridge"/>
+    <arg name="behavior_config_filepath" value="config/$(var behavior).yaml"/>
+  </include>
 </launch>

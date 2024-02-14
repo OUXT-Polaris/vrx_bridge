@@ -23,7 +23,7 @@ target_link_libraries(vrx_bridge_node
   vrx_bridge_component
 )
 
-install(DIRECTORY launch
+install(DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}
 )
 
