@@ -8,7 +8,9 @@
   
   <include file="$(find-pkg-share robotx_ekf)/launch/ekf.launch.xml"/>
 
-  <include file="$(find-pkg-share perception_bringup)/launch/perception_bringup.launch.py">
+  <include file="$(find-pkg-share perception_bringup)/launch/perception_bringup.launch.xml">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="vrx" value="true"/>
   </include>
 
   <include file="$(find-pkg-share robotx_planner_bringup)/launch/planner_bringup.launch.py">
