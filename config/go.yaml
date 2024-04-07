@@ -1,0 +1,8 @@
+plugins:
+  - package: robotx_behavior_tree
+    name:
+      - move_goal_action
+behavior:
+  description:
+    package: vrx_bridge
+    path : config/behavior_trees/go.xml

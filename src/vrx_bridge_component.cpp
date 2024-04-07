@@ -31,7 +31,7 @@ VRXBridgeComponent::VRXBridgeComponent(const rclcpp::NodeOptions & options)
     "/vrx/stationkeeping/goal", 1,
     std::bind(&VRXBridgeComponent::Goaltopic_callback, this, std::placeholders::_1));
 
-  gps_pub_ = this->create_publisher<geographic_msgs::msg::GeoPoseStamped>("/geopose", 1);
+  gps_pub_ = this->create_publisher<geographic_msgs::msg::GeoPoseStamped>("/localization/geopose", 1);
   imu_pub_ = this->create_publisher<sensor_msgs::msg::Imu>("/imu", 1);
   goal_pub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("/move_base_simple/goal", 1);
 }
