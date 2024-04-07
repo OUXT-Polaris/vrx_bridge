@@ -22,5 +22,6 @@
   </include> -->
 
   <node pkg="rviz2" exec="rviz2" args="-d $(find-pkg-share vrx_bridge)/config/vrx.rviz">
+    <param name="use_sim_time" value="true"/>
   </node>
 </launch>
