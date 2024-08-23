@@ -27,9 +27,9 @@ VRXBridgeComponent::VRXBridgeComponent(const rclcpp::NodeOptions & options)
     "/wamv/sensors/imu/imu/data", 1,
     std::bind(&VRXBridgeComponent::Imutopic_callback, this, std::placeholders::_1));
 
-  goal_sub_ = this->create_subscription<geometry_msgs::msg::PoseStamped>(
-    "/vrx/stationkeeping/goal", 1,
-    std::bind(&VRXBridgeComponent::Goaltopic_callback, this, std::placeholders::_1));
+  // goal_sub_ = this->create_subscription<geometry_msgs::msg::PoseStamped>(
+  //   "/vrx/stationkeeping/goal", 1,
+  //   std::bind(&VRXBridgeComponent::Goaltopic_callback, this, std::placeholders::_1));
 
   gps_pub_ =
     this->create_publisher<geographic_msgs::msg::GeoPoseStamped>("/localization/geopose", 1);
@@ -57,13 +57,13 @@ void VRXBridgeComponent::Imutopic_callback(const sensor_msgs::msg::Imu::SharedPt
   imu_pub_->publish(imu);
 }
 
-void VRXBridgeComponent::Goaltopic_callback(const geometry_msgs::msg::PoseStamped::SharedPtr msg)
-{
-  geometry_msgs::msg::PoseStamped goal;
-  goal.header = msg->header;
-  goal.pose = msg->pose;
-  goal_pub_->publish(goal);
-}
+// void VRXBridgeComponent::Goaltopic_callback(const geometry_msgs::msg::PoseStamped::SharedPtr msg)
+// {
+//   geometry_msgs::msg::PoseStamped goal;
+//   goal.header = msg->header;
+//   goal.pose = msg->pose;
+//   goal_pub_->publish(goal);
+// }
 
 }  // namespace vrx_bridge
 
