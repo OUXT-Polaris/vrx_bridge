@@ -33,7 +33,7 @@ VRXBridgeComponent::VRXBridgeComponent(const rclcpp::NodeOptions & options)
 
   gps_pub_ =
     this->create_publisher<geographic_msgs::msg::GeoPoseStamped>("/localization/geopose", 1);
-  imu_pub_ = this->create_publisher<sensor_msgs::msg::Imu>("/imu", 1);
+  imu_pub_ = this->create_publisher<sensor_msgs::msg::Imu>("/localization/imu", 1);
   goal_pub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("/move_base_simple/goal", 1);
 }
 
